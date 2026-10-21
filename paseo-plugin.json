@@ -1,4 +1,7 @@
 {
   "id": "schedule-runs",
-  "requirements": { "paseo": ">=0.7.2-0" }
+  "name": "Schedule runs",
+  "description": "Sidebar feed of every schedule run with status, workspace, agent, archived state, and the agent's final response.",
+  "media": ["images/schedule-runs.png"],
+  "requirements": { "paseo": ">=0.12.0" }
 }

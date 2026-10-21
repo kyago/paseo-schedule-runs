@@ -1,5 +1,5 @@
 import type { PluginTheme } from "@getpaseo/plugin";
-import type { PluginSurfaceProps } from "@getpaseo/plugin/client";
+import type { PluginScreenProps } from "@getpaseo/plugin/client";
 import { Icon } from "@getpaseo/plugin/client/react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -53,7 +53,7 @@ function errorMessage(cause: unknown): string {
   return text && text !== "undefined" ? text : "Could not load the schedule runs.";
 }
 
-export function RunsSurface({ theme, host, layout, navigation }: PluginSurfaceProps) {
+export function RunsScreen({ theme, host, layout, navigation }: PluginScreenProps) {
   const scheme = useMemo(() => themeScheme(theme), [theme]);
   const styles = useMemo(() => createStyles(theme, layout.compact), [theme, layout.compact]);
 

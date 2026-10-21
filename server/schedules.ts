@@ -1,7 +1,7 @@
 import type { Dirent } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join } from "node:path";
-import type { PaseoAgent, PaseoApi, PaseoWorkspace } from "@getpaseo/client";
+import type { PluginHandlerContext } from "@getpaseo/plugin/server";
 import type { RpcInput, RpcOutput } from "@getpaseo/plugin";
 import { z } from "zod";
 import {
@@ -15,6 +15,11 @@ import {
 } from "../shared/contracts";
 import { countByStatus, describeCadence, findPullRequestUrl } from "../shared/model";
 import { paseoHome } from "./paseo-home";
+
+// Plugin code may not import @getpaseo/client (types included); derive the types from the SDK.
+type PaseoApi = PluginHandlerContext["paseo"];
+type PaseoAgent = Awaited<ReturnType<PaseoApi["agents"]["list"]>>["entries"][number]["agent"];
+type PaseoWorkspace = Awaited<ReturnType<PaseoApi["workspaces"]["list"]>>["entries"][number];
 
 /**
  * The plugin SDK has no schedules namespace, so the run feed is assembled from what the daemon

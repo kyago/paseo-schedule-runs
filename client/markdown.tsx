@@ -1,7 +1,7 @@
 import type { PluginTheme } from "@getpaseo/plugin";
 import { type ReactNode, useMemo } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
-import { openExternalUrl } from "./open-external-url";
+import { openExternalUrl } from "@getpaseo/plugin/client";
 
 /**
  * A small Markdown renderer built on React Native text primitives, for the agent's final

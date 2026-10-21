@@ -1,6 +1,7 @@
-import type { PaseoApi } from "@getpaseo/client";
 import { usePaseo } from "@getpaseo/plugin/client";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+type PaseoApi = ReturnType<typeof usePaseo>;
 
 /**
  * Fallback for a run whose record carries no output: the agent's own transcript, read through

@@ -1,31 +1,35 @@
-import type { PluginClientContext } from "@getpaseo/plugin/client";
-import { RunsSurface } from "./client/runs-surface";
+import type { PluginClientContext, PluginSidebarItemProps } from "@getpaseo/plugin/client";
+import { SidebarRow } from "@getpaseo/plugin/client/ui";
+import { RunsScreen } from "./client/runs-screen";
 
 /**
- * Registers the run feed as a sidebar surface next to New workspace, History, and Schedules,
- * plus a Command Center entry that opens it. Contribution ids must match `^[a-z][a-z0-9-]*$`;
- * a surface opened straight from the Command Center is titled with the surface id, so the id
- * is kept readable.
+ * Registers the run feed as a screen with a sidebar header row next to New workspace, History,
+ * and Schedules, plus a Command Center entry (the way in on iOS and Android).
  */
-const SURFACE_ID = "schedule-runs";
+const SCREEN_ID = "schedule-runs";
+
+function RunsSidebarItem({ currentScreen, openScreen }: PluginSidebarItemProps) {
+  return (
+    <SidebarRow
+      icon="CalendarClock"
+      active={currentScreen?.screenId === SCREEN_ID}
+      onPress={() => openScreen({ screenId: SCREEN_ID })}
+    />
+  );
+}
 
 export default function contribute(client: PluginClientContext) {
   const removers = [
-    client.addSurface(SURFACE_ID, RunsSurface),
-    client.addSidebarItem({
-      id: "runs",
-      title: "Schedule runs",
-      icon: "CalendarClock",
-      surface: SURFACE_ID,
-    }),
+    client.addScreen({ id: SCREEN_ID, title: "Schedule runs", Component: RunsScreen }),
+    client.addSidebarHeaderItem({ id: "runs", title: "Schedule runs", Component: RunsSidebarItem }),
     client.addCommandCenterItem({
       id: "open-schedule-runs",
       title: "Open schedule runs",
       icon: "CalendarClock",
       keywords: ["schedule", "schedules", "runs", "cron", "heartbeat", "history", "output"],
       context: "global",
-      onSelect({ openSurface }) {
-        openSurface(SURFACE_ID);
+      onSelect({ openScreen }) {
+        openScreen({ screenId: SCREEN_ID });
       },
     }),
   ];

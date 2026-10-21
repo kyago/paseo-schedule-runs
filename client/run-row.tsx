@@ -1,5 +1,5 @@
 import type { PluginTheme } from "@getpaseo/plugin";
-import type { PluginSurfaceProps } from "@getpaseo/plugin/client";
+import { openExternalUrl, type PluginScreenProps } from "@getpaseo/plugin/client";
 import { Icon } from "@getpaseo/plugin/client/react-native";
 import { memo, useCallback, useMemo, useState } from "react";
 import {
@@ -22,7 +22,6 @@ import {
   runDuration,
   runScheduleLabel,
 } from "../shared/model";
-import { openExternalUrl } from "./open-external-url";
 import { RunOutput } from "./run-output";
 import { useTranscriptOutput } from "./use-transcript-output";
 
@@ -33,7 +32,7 @@ import { useTranscriptOutput } from "./use-transcript-output";
  * the full output never collapses it. Actions sit at the bottom of the expanded body.
  */
 
-export type RowNavigation = PluginSurfaceProps["navigation"];
+export type RowNavigation = PluginScreenProps["navigation"];
 
 export interface RunRowProps {
   run: RunRowModel;

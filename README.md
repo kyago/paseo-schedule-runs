@@ -1,4 +1,27 @@
-# schedule-runs
+# schedule-runs (Paseo 0.12 포트)
+
+[panrafal/paseo-plugins](https://github.com/panrafal/paseo-plugins/tree/main/schedule-runs)의 `schedule-runs`(MIT)를 Paseo 0.12 플러그인 SDK에 맞게 고친 버전.
+
+원본 대비 변경점:
+
+- `@getpaseo/client` 타입 import 제거. 0.12는 플러그인 코드의 이 import를 타입까지 막아 원본은 설치 시 빌드가 실패한다. 타입은 SDK(`PluginHandlerContext`, `usePaseo`)에서 파생.
+- 폐기된 API 교체: `addSurface` → `addScreen`, `addSidebarItem` → `addSidebarHeaderItem` + `SidebarRow`, `openSurface` → `openScreen`.
+- 데스크톱 전용 링크 열기 우회 코드를 SDK `openExternalUrl`로 대체.
+- 벤더링한 v0.8 타입 선언(`paseo-plugin.d.ts`)을 지우고 `@getpaseo/plugin@0.12.0`으로 타입 검사.
+- `requirements.paseo`: `>=0.12.0`.
+
+설치:
+
+```bash
+git clone https://github.com/kyago/paseo-schedule-runs.git
+paseo plugin add "$PWD/paseo-schedule-runs"
+```
+
+아래는 원본 README.
+
+---
+
+## schedule-runs
 
 Paseo plugin that adds a **Schedule runs** entry to the app sidebar, next to "New workspace",
 "History" and "Schedules". It is one feed of every run that every schedule on the selected host
